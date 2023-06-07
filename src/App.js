@@ -27,7 +27,7 @@ function App() {
 	}
 
 	return (
-		<>
+		<div>
 			<button className='close' onClick={handleOpen}>
 				&times;
 			</button>
@@ -59,7 +59,7 @@ function App() {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
 
