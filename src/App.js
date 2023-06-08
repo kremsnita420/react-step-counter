@@ -10,25 +10,31 @@ function App() {
 	const [step, setStep] = useState(1);
 	const [isOpen, setIsOpen] = useState(true);
 
+	// Decrease counter
 	function handlePrevious() {
 		if (step > 1) {
-			setStep(step - 1);
+			setStep(s => s - 1);
 		}
 	}
 
+	// Increase counter
 	function handleNext() {
 		if (step < 3) {
-			setStep(step + 1);
+			setStep(s => s + 1);
 		}
 	}
+
 	function handleOpen() {
-		setIsOpen(!isOpen);
-		document.querySelector('.close').classList.toggle('close-button');
+		// Toggle modal
+		setIsOpen(is => !is);
 	}
 
 	return (
 		<>
-			<button className='close' onClick={handleOpen}>
+			<button
+				className={`close${isOpen ? ' close-button' : ''}`}
+				onClick={handleOpen}
+			>
 				&times;
 			</button>
 			{isOpen && (
