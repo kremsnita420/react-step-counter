@@ -6,37 +6,44 @@ const messages = [
 	'Invest your new income 🤑',
 ];
 
-function App() {
+export default function App() {
+	return (
+		<div>
+			<Steps />
+			<StepMessage step={1}>Step 1 </StepMessage>
+
+			<StepMessage step={2}>Step 2</StepMessage>
+		</div>
+	);
+}
+
+function Steps() {
 	const [step, setStep] = useState(1);
 	const [isOpen, setIsOpen] = useState(true);
 
-	// Decrease counter
+	// const [test, setTest] = useState({ name: "Jonas" });
+
 	function handlePrevious() {
-		if (step > 1) {
-			setStep(s => s - 1);
-		}
+		if (step > 1) setStep(s => s - 1);
 	}
 
-	// Increase counter
 	function handleNext() {
 		if (step < 3) {
 			setStep(s => s + 1);
+			// setStep((s) => s + 1);
 		}
-	}
 
-	function handleOpen() {
-		// Toggle modal
-		setIsOpen(is => !is);
+		// BAD PRACTICE
+		// test.name = "Fred";
+		// setTest({ name: "Fred" });
 	}
 
 	return (
-		<>
-			<button
-				className={`close${isOpen ? ' close-button' : ''}`}
-				onClick={handleOpen}
-			>
+		<div>
+			<button className='close' onClick={() => setIsOpen(is => !is)}>
 				&times;
 			</button>
+
 			{isOpen && (
 				<div className='steps'>
 					<div className='numbers'>
@@ -45,9 +52,16 @@ function App() {
 						<div className={step >= 3 ? 'active' : ''}>3</div>
 					</div>
 
-					<p className='message'>
-						Step {step}: {messages[step - 1]}
-					</p>
+					<StepMessage step={step}>{messages[step - 1]}</StepMessage>
+					<div className='buttons'>
+						<Button
+							bgColor='#795555'
+							textColor='#f5f'
+							onClick={() => alert(`LEARN HOW TO $`)}
+						>
+							LEARN HOW
+						</Button>
+					</div>
 
 					<div className='buttons'>
 						<Button bgColor='#7950f2' textColor='#fff' onClick={handlePrevious}>
@@ -65,7 +79,16 @@ function App() {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
+	);
+}
+
+function StepMessage({ step, children }) {
+	return (
+		<div className='message'>
+			<h3>Step {step}</h3>
+			{children}
+		</div>
 	);
 }
 
@@ -79,5 +102,3 @@ function Button({ textColor, bgColor, onClick, children }) {
 		</button>
 	);
 }
-
-export default App;
